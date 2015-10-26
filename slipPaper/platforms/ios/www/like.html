@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>小纸条</title>
+
+    <!-- Sets initial viewport load and disables zooming  -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+
+    <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!-- Include the compiled Ratchet CSS -->
+    <link href="css/ratchet.css" rel="stylesheet">
+      <link href="//cdn.bootcss.com/ionicons/2.0.1/css/ionicons.css" rel="stylesheet">
+
+    <!-- Include the compiled Ratchet JS -->
+    <script src="js/ratchet.js"></script>
+    <script src="js/push.js"></script>
+ 
+
+  </head>
+  <body>
+
+    <!-- Make sure all your bars are the first things in your <body> -->
+    <header class="bar bar-nav">
+      <button class="btn btn-link btn-nav pull-left">
+          <span class="icon icon-left-nav"></span>
+       <a href="home.html">返回</a>
+      </button>
+      <h1 class="title">收藏</h1>
+    </header>
+
+    <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
+     <div class="content">
+ 
+       <ul class="table-view">
+        <li class="table-view-cell">
+          <a class="navigate-right" href="choose-theater.html" data-transition="slide-in">
+            Objective-c 初级编程
+            <p>人民邮电出版社</p>
+        </li>
+      </a>
+        <li class="table-view-cell">
+          <a class="navigate-right" href="choose-theater.html" data-transition="slide-in">
+            Objective-c 中级编程
+            <p>人民邮电出版社</p>
+          </a>
+        </li>
+        <li class="table-view-cell">
+          <a class="navigate-right" href="choose-theater.html" data-transition="slide-in">
+            Objective-c 高级编程
+            <p>人民邮电出版社</p>
+          </a>
+        </li>
+        <li class="table-view-cell">
+          <a class="navigate-right" href="choose-theater.html" data-transition="slide-in">
+            c++ 初级编程
+            <p>人民邮电出版社</p>
+          </a>
+        </li>
+        <li class="table-view-cell">
+          <a class="navigate-right" href="choose-theater.html" data-transition="slide-in">
+            c 初级编程
+            <p>人民邮电出版社</p>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+        <nav class="bar bar-tab">
+            <a class="tab-item " href="home.html">
+              <span class="icon icon-home"></span>
+              <span class="tab-label">主页</span>
+            </a>
+            <a class="tab-item active" href="like.html">
+              <span class="icon icon-star-filled"></span>
+              <span class="tab-label">收藏</span>
+            </a>
+            <a class="tab-item" href="slip.html">
+              <span class="icon icon-pages"></span>
+              <span class="tab-label">纸条</span>
+            </a>
+            <a class="tab-item" href="settings.html">
+              <span class="icon icon-gear"></span>
+              <span class="tab-label">设置</span>
+            </a>
+        </nav>
+    </div>
+
+
+  </body>
+</html>

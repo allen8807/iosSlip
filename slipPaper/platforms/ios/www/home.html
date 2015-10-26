@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>小纸条</title>
+
+    <!-- Sets initial viewport load and disables zooming  -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+
+    <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+        
+
+    <!-- Include the compiled Ratchet CSS -->
+    <link href="css/ratchet.css" rel="stylesheet">
+
+    <!-- Include the compiled Ratchet JS -->
+    <script src="js/ratchet.js"></script>
+    <script src="js/push.js"></script>
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" charset="utf-8" src="cordova_plugins.js"></script>
+   
+    <script type="text/javascript" charset="utf-8">
+        
+        
+        var pictureSource;		//图片来源
+        var destinationType;		//设置返回值的格式
+        
+        // 等待PhoneGap连接设备
+        document.addEventListener("deviceready",onDeviceReady,false);
+        
+        // PhoneGap准备就绪，可以使用！
+        function onDeviceReady() {
+            pictureSource=navigator.camera.PictureSourceType;
+            destinationType=navigator.camera.DestinationType;
+            console.log(navigator.camera);
+        }
+    
+    function post(URL, PARAMS) {
+        var temp = document.createElement("form");
+        
+        temp.action = URL;
+        temp.method = "post";
+        temp.style.display = "none";
+        for (var x in PARAMS) {
+            var opt = document.createElement("input");
+             opt.id = x;
+            opt.name = x;
+            opt.value = PARAMS[x];
+            // alert(opt.name)
+            temp.appendChild(opt);
+        }
+        document.body.appendChild(temp);
+        temp.submit();
+        return temp;
+    }
+    
+    
+    // 当成功获得一张照片的Base64编码数据后被调用
+    function onPhotoDataSuccess(imageData) {
+        
+        // 取消注释以查看Base64编码的图像数据
+        // console.log(imageData);
+        // 获取图像句柄
+      //  var smallImage = document.getElementById('smallImage');
+        
+        // 取消隐藏的图像元素
+        //smallImage.style.display = 'block';
+        
+        // 显示拍摄的照片
+        // 使用内嵌CSS规则来缩放图片
+        // smallImage.src = "data:image/jpeg;base64," + imageData;
+        //smallImage.src =  imageData;
+       //  window.navigate("findPage.html");
+        //  console.log(imageData);
+        var url = "http://182.92.192.130/book/info";
+        
+         console.log("begin upload");
+       var temp =  post(url,{image:imageData});
+     //  $.post("test.php", { name: "John", time: "2pm" } );
+    //   jQuery.post(url,{image:imageData});
+        console.log("temp "+temp);
+        console.log("end"+url);
+       // alert("返回");
+         location.href = 'upload.html';
+      
+         
+                          
+                                 
+                          
+    }
+    
+    // 当成功得到一张照片的URI后被调用
+    function onPhotoURISuccess(imageURI) {
+        
+        // 取消注释以查看图片文件的URI
+        // console.log(imageURI);
+        // 获取图片句柄
+        var largeImage = document.getElementById('largeImage');
+        
+        // 取消隐藏的图像元素
+        largeImage.style.display = 'block';
+        
+        // 显示拍摄的照片
+        // 使用内嵌CSS规则来缩放图片
+        largeImage.src = imageURI;
+        
+        
+    }
+    
+    // “Capture Photo”按钮点击事件触发函数
+    function capturePhoto() {
+        
+        // 使用设备上的摄像头拍照，并获得Base64编码字符串格式的图像
+        navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 100, targetWidth: 320, targetHeight: 480 , destinationType: destinationType.DATA_URL, saveToPhotoAlbum: true});
+        
+    }
+    
+    // “Capture Editable Photo”按钮点击事件触发函数
+    function capturePhotoEdit() {
+        
+        // 使用设备上的摄像头拍照，并获得Base64编码字符串格式的可编辑图像
+        navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50, allowEdit: true, targetWidth: 50, targetHeight: 50 ,popoverOptions: new CameraPopoverOptions(300, 300, 100, 100, Camera.PopoverArrowDirection.ARROW_ANY)});
+    }
+    
+    //“From Photo Library”/“From Photo Album”按钮点击事件触发函数
+    function getPhoto(source) {
+        
+        // 从设定的来源处获取图像文件URI
+        navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50,
+                                    destinationType: destinationType.FILE_URI,sourceType: source });
+    }
+    largeImage
+    // 当有错误发生时触发此函数
+    function onFail(mesage) {
+        alert('Failed because: ' + message);
+    }
+    
+        </script>
+
+
+  </head>
+  <body>
+   
+
+    <!-- Make sure all your bars are the first things in your <body> -->
+    <header class="bar bar-nav">
+      <h1 class="title">小纸条</h1>
+    </header>
+
+    <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
+     <div class="content">
+
+       
+        
+        <div class="content-padded">
+            <br/><br/><br/>
+            <div style="text-align:center;">
+                <img id="mycamera" onclick="capturePhoto();" src="img/camera.png" alt="...">
+                
+            </div>
+            <div style="text-align:center;">
+                <img src="img/title.jpg" alt="...">
+                    </div>
+        </div>
+
+        <nav class="bar bar-tab">
+            <a class="tab-item active" href="home.html">
+              <span class="icon icon-home"></span>
+              <span class="tab-label">主页</span>
+            </a>
+            <a class="tab-item" href="like.html">
+              <span class="icon icon-star-filled"></span>
+              <span class="tab-label">收藏</span>
+            </a>
+             <a class="tab-item" href="slip.html">
+              <span class="icon icon-pages"></span>
+              <span class="tab-label">纸条</span>
+            </a>
+            <a class="tab-item" href="settings.html">
+              <span class="icon icon-gear"></span>
+              <span class="tab-label">设置</span>
+            </a>
+        </nav>
+    </div>
+
+
+  </body>
+</html>
