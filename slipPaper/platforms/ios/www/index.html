@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
+      
         <title>Capture Photo</title>
         
         <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
@@ -24,7 +26,7 @@
         function onPhotoDataSuccess(imageData) {
             
             // 取消注释以查看Base64编码的图像数据
-            // console.log(imageData);
+        //     console.log(imageData);
             // 获取图像句柄
             var smallImage = document.getElementById('smallImage');
             
@@ -57,7 +59,7 @@
         function capturePhoto() {
             
             // 使用设备上的摄像头拍照，并获得Base64编码字符串格式的图像
-            navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50 });
+            navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50,destinationType: destinationType.DATA_URL});
         }
         
         // “Capture Editable Photo”按钮点击事件触发函数
@@ -80,15 +82,22 @@
             alert('Failed because: ' + message);
         }
         
+        function redi() {
+            window.location.href('home.html');
+            // location.href = 'home.html';
+        }
+        
             </script>
     </head>
     <body>
         <p>title --- test</p>
-        <button onclick="capturePhoto();">Capture Photo</button> <br>
+        <button onclick="redi();">redirect</button> <br>
+       <button onclick="capturePhoto();">Capture Photo</button> <br>
         <button onclick="capturePhotoEdit();">Capture Editable Photo</button> <br>
         <button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button><br>
         <button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">From Photo Album</button><br>
         <img style="display:none;width:60px;height:60px;" id="smallImage" src="" />
         <img style="display:none;" id="largeImage" src="" />
+        <li><a href="home.html">home</a></li>
     </body>
 </html>
